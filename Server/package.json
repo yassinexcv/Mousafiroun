@@ -1,0 +1,30 @@
+{
+  "name": "mousafiroun",
+  "version": "1.0.0",
+  "description": "Mousafiroun",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yassinexcv/Mousafiroun.git"
+  },
+  "author": "yassine",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yassinexcv/Mousafiroun/issues"
+  },
+  "homepage": "https://github.com/yassinexcv/Mousafiroun#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.10.0",
+    "mongoose": "^6.6.5",
+    "nodemon": "^2.0.20"
+  }
+}
