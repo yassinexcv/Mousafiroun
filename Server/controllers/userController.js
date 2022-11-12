@@ -57,6 +57,27 @@ const registerUser = asyncHandler(async (req, res) => {
 
 })
 
+// email exists
+const emailExist = asyncHandler(async (req, res) => {
+
+    const { email } = req.body;
+    // check if email and password are filled
+    const user = await User.findOne({ email });
+    res.status(200)
+
+    if (user) {
+        res.json({
+            emailExist: true,
+        })
+    } else {
+        res.json({
+            emailExist: false,
+        })
+    }
+
+})
+
+
 // login user
 
 
@@ -67,6 +88,7 @@ const loginUser = asyncHandler(async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user && (await bcrypt.compare(password, user.password))) {
+        res.status(200)
         res.json({
             _id: user._id,
             name: user.name,
@@ -78,7 +100,12 @@ const loginUser = asyncHandler(async (req, res) => {
         throw new Error('Invalid email or password');
     }
 
+
 })
+
+// function for logout user
+
+
 
 
 
@@ -116,16 +143,16 @@ const findTrip = asyncHandler(async (req, res) => {
         });
     }
     const trip = await Trip.find({ deppart, arivee });
-   
+
     res.send(trip);
-     if (!trip) {
+    if (!trip) {
         res.status(404);
         throw new Error('Trip not found');
     }
 });
 
-   const reservation = asyncHandler(async (req, res) => {
-    const {tripId , userId} = req.params;
+const reservation = asyncHandler(async (req, res) => {
+    const { tripId, userId } = req.params;
     const trip = await Trip.findById(tripId);
     const user = await User.findById(userId);
     if (trip && user) {
@@ -133,7 +160,7 @@ const findTrip = asyncHandler(async (req, res) => {
             trip_id: tripId,
             user_id: userId,
         });
-        if(!ticket){
+        if (!ticket) {
             res.status(400);
             throw new Error('Invalid ticket data');
         }
@@ -156,6 +183,16 @@ const getTicket = asyncHandler(async (req, res) => {
     }
 });
 
+const getAllTrip = asyncHandler(async (req, res) => {
+    const trip = await Trip.find({}).populate('car','Numero marque');
+    res.json(trip);
+});
+
+
+
+
+
+
 
 
 
@@ -165,5 +202,7 @@ module.exports = {
     getUser,
     findTrip,
     reservation,
-    getTicket
+    getTicket,
+    emailExist,
+    getAllTrip
 }

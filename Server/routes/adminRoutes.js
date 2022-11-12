@@ -11,7 +11,7 @@ const {protect} = require ('../middleware/adminMiddleware');
 router.post('/',registerAdmin);
 router.post('/login',loginAdmin);
 router.get('/getadmin', protect ,getAdmin);
-router.post('/addtrip' , protect , addTrip);
+router.post('/addtrip' , addTrip);
 router.post('/addcar' ,addCar);
 router.get('/gettrip' ,getTrip);
 router.post('/findtrip' ,findTrip);
